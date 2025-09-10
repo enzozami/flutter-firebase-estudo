@@ -35,6 +35,9 @@ class _LoginPageState extends State<LoginPage> {
       );
     }
 
+    user?.updateDisplayName('Enzo');
+
+    log('${credential.user?.displayName}');
     log('${credential.user?.email}');
     log('${credential.user?.emailVerified}');
   }
