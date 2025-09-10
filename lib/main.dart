@@ -1,7 +1,11 @@
+import 'dart:developer';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_firebase_example/auth/email_password/login_page.dart';
 import 'package:flutter_firebase_example/auth/email_password/register_page.dart';
+import 'package:flutter_firebase_example/auth/show_user.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,6 +25,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/auth/email_password/register': (_) => RegisterPage(),
         '/auth/email_password/login': (_) => LoginPage(),
+        '/auth/show_user': (_) => ShowUser(),
       },
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -35,6 +40,16 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  @override
+  void initState() {
+    FirebaseAuth.instance.authStateChanges().listen(
+      (User? user) {
+        log('Usuário logado? ${user != null}');
+      },
+    );
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,6 +68,10 @@ class _MyHomePageState extends State<MyHomePage> {
             TextButton(
               onPressed: () => Navigator.of(context).pushNamed('/auth/email_password/login'),
               child: Text('Login User E-mail Password'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.of(context).pushNamed('/auth/show_user'),
+              child: Text('Show User Logged'),
             ),
           ],
         ),
