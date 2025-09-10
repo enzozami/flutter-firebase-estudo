@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_firebase_example/auth/email_password/login_page.dart';
 import 'package:flutter_firebase_example/auth/email_password/register_page.dart';
 
 Future<void> main() async {
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         '/auth/email_password/register': (_) => RegisterPage(),
+        '/auth/email_password/login': (_) => LoginPage(),
       },
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -48,7 +50,10 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () => Navigator.of(context).pushNamed('/auth/email_password/register'),
               child: Text('Register User E-mail Password'),
             ),
-            // TextButton(onPressed: onPressed, child: Text('')),
+            TextButton(
+              onPressed: () => Navigator.of(context).pushNamed('/auth/email_password/login'),
+              child: Text('Login User E-mail Password'),
+            ),
           ],
         ),
       ),

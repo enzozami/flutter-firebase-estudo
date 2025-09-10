@@ -1,14 +1,16 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class RegisterPage extends StatefulWidget {
-  const RegisterPage({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
   @override
-  State<RegisterPage> createState() => _RegisterPageState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
+class _LoginPageState extends State<LoginPage> {
   final emailEC = TextEditingController();
   final passwordEC = TextEditingController();
 
@@ -19,17 +21,29 @@ class _RegisterPageState extends State<RegisterPage> {
     super.dispose();
   }
 
-  Future<void> registerUser() async {
+  Future<void> loginUser() async {
     final credential = await FirebaseAuth.instance
-        .createUserWithEmailAndPassword(email: emailEC.text, password: passwordEC.text);
-    credential.user?.sendEmailVerification();
+        .signInWithEmailAndPassword(email: emailEC.text, password: passwordEC.text);
+
+    final user = credential.user;
+
+    if (user != null && !user.emailVerified) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('E-mail não verificado!'),
+        ),
+      );
+    }
+
+    log('${credential.user?.email}');
+    log('${credential.user?.emailVerified}');
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Cadastro de Usuário'),
+        title: const Text('Login de Usuário'),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -49,8 +63,8 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
               ),
               ElevatedButton(
-                onPressed: registerUser,
-                child: Text('Registrar usuário'),
+                onPressed: loginUser,
+                child: Text('Login usuário'),
               )
             ],
           ),
