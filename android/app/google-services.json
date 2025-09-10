@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "612915883729",
+    "project_id": "fir-example-adf-6b23b",
+    "storage_bucket": "fir-example-adf-6b23b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:612915883729:android:53850fa085856407e49ff0",
+        "android_client_info": {
+          "package_name": "enzo.crmsolucoes.flutter_firebase_example"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCukVrZuhE7AghUVsEFIfxqjaHC8asefGE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
